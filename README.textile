@@ -5,3 +5,5 @@ In my ongoing efforts to become a better person, I pick a bad habit I'm tried to
 The simplest thing I could think of was a single-page app that could be saved to the home screen, storing the success/failure history in HTML5 localStorage. This means that no server is required after the initial download and all your data is completely private, but the history will persist through browser crashes and phone power cycles.
 
 Whenever you confront your chosen temptation, open the page and click "I resisted" or "I failed". The text box will store anything you think would be helpful in your quest, such as environmental details that might have hindered/helped you.
+
+Try it now by hitting "this link":http://billgathen.com/i_resisted.html from your phone. Save it to your home screen for easiest use.
