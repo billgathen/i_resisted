@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>I Resisted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#resisted').bind('click', function() { store('resisted') });
+        $('#failed').bind('click', function() { store('failed') });
+        $('#restart').bind('click', function() { clear(); });
+        show_history();
+      });
+
+      function store(action) {
+        localStorage.setItem('history', build_msg(action, localStorage["history"]));
+
+        $('#note').val('');
+        show_history();
+      }
+
+      function build_msg(action, existing_msg) {
+        if ( null == existing_msg ) {
+          existing_msg = '';
+        } else {
+          existing_msg = "<br/>" + existing_msg;
+        }
+        var note = $('#note').val();
+        var msg = 'I ' + action;
+        if ( note !== '' ) { msg = msg + ": " + note; }
+
+        return msg + existing_msg;
+      }
+
+      function show_history() {
+        $('#history').html(localStorage.getItem('history'));
+      }
+
+      function clear() {
+        localStorage.clear('history');
+        show_history();
+      }
+    </script>
+  </head>
+  <body>
+    <div data-role="page">
+      <div data-role="header">
+        <h1>I Resisted</h1>
+      </div>
+      <div data-role="content">
+        <div data-role="controlgroup" data-type="horizontal">
+          <a id="resisted" href="#" data-role="button" data-icon="check">I resisted :-)</a>
+          <a id="failed" href="#" data-role="button" data-icon="delete">I failed :-(</a>
+        </div>
+        <textarea id='note'></textarea>
+        <div id="history">
+        </div>
+        <a id="restart" href="#" data-role="button">Start fresh</a>
+      </div>
+    </div>
+  </body>
+</html>
