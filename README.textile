@@ -1,0 +1,7 @@
+h1. I Resisted!
+
+In my ongoing efforts to become a better person, I pick a bad habit I'm tried to eliminate from my life and focus on eliminating it for a month. I wanted a simple app I could keep on my phone that would let me track every time I succeeded or failed in resisting the temptation.
+
+The simplest thing I could think of was a single-page app that could be saved to the home screen, storing the success/failure history in HTML5 localStorage. This means that no server is required after the initial download and all your data is completely private, but the history will persist through browser crashes and phone power cycles.
+
+Whenever you confront your chosen temptation, open the page and click "I resisted" or "I failed". The text box will store anything you think would be helpful in your quest, such as environmental details that might have hindered/helped you.
