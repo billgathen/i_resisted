@@ -13,6 +13,7 @@
         $('#resisted').bind('click', function() { store('resisted') });
         $('#failed').bind('click', function() { store('failed') });
         $('#restart').bind('click', function() { clear(); });
+        update_counts();
         show_history();
       });
 
@@ -21,6 +22,7 @@
 
         $('#note').val('');
         show_history();
+        update_counts();
       }
 
       function build_msg(action, existing_msg) {
@@ -44,7 +46,28 @@
         localStorage.clear('history');
         show_history();
       }
+
+      function update_counts() {
+        var history = localStorage.getItem('history');
+        if (history) {
+          var resisted = localStorage.getItem('history').match(/I resisted/g);
+          var failed = localStorage.getItem('history').match(/I failed/g);
+          if (resisted) {
+            var resisted_count = resisted.length;
+            $('#resisted_count').text(resisted_count);
+          }
+          if (failed) {
+            var failed_count = failed.length;
+            $('#failed_count').text(failed_count);
+          }
+        }
+      }
     </script>
+    <style type="text/css">
+      .fl { float: left; }
+      .fr { float: right; }
+      #resisted_count, #failed_count { font-weight: 700; }
+    </style>
   </head>
   <body>
     <div data-role="page">
@@ -52,9 +75,14 @@
         <h1>I Resisted</h1>
       </div>
       <div data-role="content">
-        <div data-role="controlgroup" data-type="horizontal">
+        <div data-role="controlgroup" data-type="horizontal" class="fl">
           <a id="resisted" href="#" data-role="button" data-icon="check">I resisted :-)</a>
           <a id="failed" href="#" data-role="button" data-icon="delete">I failed :-(</a>
+        </div>
+        <div class="fr">
+          Resisted Count: <span id="resisted_count"></span>
+          <br>
+          Failed Count: <span id="failed_count"></span>
         </div>
         <textarea id='note'></textarea>
         <div id="history">
