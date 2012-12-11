@@ -13,14 +13,20 @@
         $('#resisted').bind('click', function() { store('resisted') });
         $('#failed').bind('click', function() { store('failed') });
         $('#restart').bind('click', function() { clear(); });
+        $('#error').hide();
         show_history();
       });
 
       function store(action) {
-        localStorage.setItem('history', build_msg(action, localStorage["history"]));
+        if( has_input() == true ){
+          localStorage.setItem('history', build_msg(action, localStorage["history"]));
 
-        $('#note').val('');
-        show_history();
+          $('#note').val('');
+          show_history();
+          $('#error').hide();
+        } else {
+          $('#error').show();
+        }
       }
 
       function build_msg(action, existing_msg) {
@@ -44,6 +50,10 @@
         localStorage.clear('history');
         show_history();
       }
+
+      function has_input() {
+        return $('#note').val() !== "";
+      }
     </script>
   </head>
   <body>
@@ -56,6 +66,7 @@
           <a id="resisted" href="#" data-role="button" data-icon="check">I resisted :-)</a>
           <a id="failed" href="#" data-role="button" data-icon="delete">I failed :-(</a>
         </div>
+        <div id="error" align="middle" class="ui-bar-e ui-corner-all"><p>You forgot to enter something!</p></div>
         <textarea id='note'></textarea>
         <div id="history">
         </div>
