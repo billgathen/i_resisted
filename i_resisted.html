@@ -45,22 +45,24 @@
       function clear() {
         localStorage.clear('history');
         show_history();
+        update_counts();
       }
 
       function update_counts() {
         var history = localStorage.getItem('history');
         if (history) {
+          var resisted_count = "";
+          var failed_count = "";
           var resisted = localStorage.getItem('history').match(/I resisted/g);
           var failed = localStorage.getItem('history').match(/I failed/g);
-          if (resisted) {
-            var resisted_count = resisted.length;
-            $('#resisted_count').text(resisted_count);
-          }
-          if (failed) {
-            var failed_count = failed.length;
-            $('#failed_count').text(failed_count);
-          }
+          resisted !== null ? resisted_count = resisted.length : resisted_count = "0";
+          failed !== null ? failed_count = failed.length : failed_count = "0";
+        } else {
+          resisted_count = "0";
+          failed_count = "0";
         }
+        $('#resisted_count').text(resisted_count);
+        $('#failed_count').text(failed_count);
       }
     </script>
     <style type="text/css">
